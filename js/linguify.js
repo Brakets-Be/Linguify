@@ -58,7 +58,7 @@ function Linguify(){
                 if (index == elementsToChangeWithAttr.length - 1){
                     loadedAllText = true;
                     var i = 0;
-                    for (i = 0; i< elementsToChangeWithAttr.length; i++){
+                    for (i = 0; i< loadedCallbacks.length; i++){
                         loadedCallbacks[i]();
                     }
                 }
