@@ -25,17 +25,23 @@ project
        index.html
 ```
 
+
+We add the string we want to use inmultiple langages in our string files for each language but using the same key. That way we can use 
+a single key in our html for multiple languages.
 **strings_en.json**
 ```
 {
   "hello_world": "Hello World !"
 }
 ```
+
 **strings_fr.json**
 ```
 {
   "hello_world": "Bonjour le monde !"
 }
+
+
 ```
 
 Add your string keys to the html elements where you wish to use a string then initialize the library at the end of your html file.
