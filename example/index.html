@@ -1,0 +1,15 @@
+<html>
+    <body>
+        <p linguify-id="hello_world"></p>
+        <p linguify-id="how_are_you"></p>
+    
+        <button onClick="linguify.setLanguage('en')">Set language to english</button>
+        <button onClick="linguify.setLanguage('fr')">Set language to french</button>
+    </body>
+    
+    <script src="/js/linguify.js"></script>
+    <script>
+        var linguify = new Linguify();
+        linguify.init({ "json_lang_location": "/languages", "default_lang": "en" });
+    </script>
+</html>
