@@ -88,7 +88,7 @@ function Linguify(){
         @param list of strings to format in the returned string. Will replace all '%s' values with the ones in this argument by order. 
         @return = Returns the value of the string from the currently set language
     */
-    this.getStringById(linguifyId, ){
+    this.getStringById = function(linguifyId){
         return loadedData[linguifyId];
     }
     
