@@ -1,15 +1,27 @@
 <html>
     <body>
+        
+        <!--eclaring the linguify-id and setting using the same id as key for a value in your strings_xx.json will set the value as the inner Html
+        of the element-->
         <p linguify-id="hello_world"></p>
         <p linguify-id="how_are_you"></p>
-    
+        
+        <!--set the string value to the value of the input, by adding the linguify-value you tel Linguify to set the value as the value of the input-->
+        <input linguify-id="hello_world" linguify-value>
+        
+        <!--set the string value to the placeholder, by adding the linguify-placeholder you tel Linguify to set the value as the placeholder-->
+        <input linguify-id="hello_world" linguify-placeholder>
+        
+        <!--set the current loadnguage to english-->
         <button onClick="linguify.setLanguage('en')">Set language to english</button>
+        
+        <!--set the current loadnguage to french-->
         <button onClick="linguify.setLanguage('fr')">Set language to french</button>
     </body>
     
     <script src="/js/linguify.js"></script>
     <script>
         var linguify = new Linguify();
-        linguify.init({ "json_lang_location": "/languages", "default_lang": "en" });
+        linguify.init({ "json_lang_location": "languages", "default_lang": "en" });
     </script>
 </html>

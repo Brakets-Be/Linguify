@@ -1,5 +1,5 @@
 # Linguify
-A web javascript library for client side multi-language website managment.
+Linguify a web javascript library for client side string localization
 
 Linguify is a small JS library developed by Brakets SRL Belgium that allows developers to manage website languages on the client side. 
 This allows users to change the language without having to refresh the page but also allows for easier language managment for landing
@@ -72,6 +72,20 @@ in the corresponding language without refreshing the page.
 The library will also generate a cookie to remember the users language choice next time he visits your website.
 
 **A full example is available in the repository**
+
+
+## Localizing input values and placeholders 
+
+To localize inpu values or placeholders simpy add the corresponding attribute in order to set the placeholder or value of the input instead
+of adding the string to the innerHtml.
+```
+    <!--set the string value to the value of the input, by adding the linguify-value you tel Linguify to set the value as the value of the input-->
+    <input linguify-id="hello_world" linguify-value>
+
+    <!--set the string value to the placeholder, by adding the linguify-placeholder you tel Linguify to set the value as the placeholder-->
+    <input linguify-id="hello_world" linguify-placeholder>
+```
+
 
 ## License
 

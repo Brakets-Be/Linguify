@@ -1,6 +1,6 @@
-/**
+/*
 
-Linguify a multi-language website managment library
+Linguify a web javascript library for client side string localization
 
 Copyright (C) 2019 Brakets SRL
 
@@ -18,16 +18,18 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/> 
 
-**/
+*/
 
 function Linguify(){
     var loadedCallbacks = [];
     var loadedAllText = false;
     var lang_location_path = "";
     var default_lang = "en";
+    var loadedData = {};
     
     /**
-    setup example { "json_lang_location": "/data/languages", "default_lang": "en" }
+        Initialize the library and load the strings.
+        setup example : { "json_lang_location": "/data/languages", "default_lang": "en" }
     */
     this.init = function(setup){
         
@@ -46,14 +48,25 @@ function Linguify(){
         }
         
         linguifyAjax( lang_location_path+"/strings_"+defaultLanguage+".json", function( data ) {
-            
+            loadedData = data;
             var elementsToChangeWithAttr = document.querySelectorAll('[linguify-id]');
             var index = 0;
             for (index = 0; index< elementsToChangeWithAttr.length; index++){
                 var element = elementsToChangeWithAttr[index];
                 var key = element.getAttribute("linguify-id");
                 var value = data[key];
-                element.innerHTML = value;
+                
+                if (element.hasAttribute("linguify-value")){
+                    element.value = value;
+                }
+                else if (element.hasAttribute("linguify-placeholder")){
+                    element.placeholder = value;
+                }
+                else {
+                    element.innerHTML = value;
+                }
+                
+                
                 
                 if (index == elementsToChangeWithAttr.length - 1){
                     loadedAllText = true;
@@ -69,10 +82,27 @@ function Linguify(){
         });
     }
     
+    /*
+        Get the string value for the given id.
+        @param linguifyId = Id of a string from the strings_xx.json file.
+        @param list of strings to format in the returned string. Will replace all '%s' values with the ones in this argument by order. 
+        @return = Returns the value of the string from the currently set language
+    */
+    this.getStringById(linguifyId, ){
+        return loadedData[linguifyId];
+    }
+    
+    /*
+        Add a callback function to be exectuted once all the strings are localized. This is useful because loading strings can sometimes take a few seconds. Make sure to add any callbacks before intializing the the Linguify object in order to catch the first string loading.
+    */
     this.addFinishCallback = function(callback){
         loadedCallbacks.push(callback);
     }
     
+    /*
+        Check if all the strings have been loaded.
+        @return boolean value
+    */
     this.isFinishedLoading = function(){
         return loadedAllText;
     }
@@ -86,6 +116,10 @@ function Linguify(){
         return lang;
     }
     
+    /*
+        Set the current language and localize the strings if available in your strings_xx.json files.
+        @param lang = a language code used in your strings directory for example setLanguage('en') will load strings from strings_en.json
+    */
     this.setLanguage = function(lang){
         createCookie('linguify_lang', lang);
         loadLanguage(lang);
